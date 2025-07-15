@@ -4,7 +4,9 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls" }
+-- rustaceanvim replaces rust_analyzer
+local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jdtls", "jsonls", "marksman", "opencl_ls", "svelte", "tailwindcss", "taplo", "yamlls", "kotlin_lsp", "gradle_ls"
+}
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -15,6 +17,21 @@ for _, lsp in ipairs(servers) do
     capabilities = nvlsp.capabilities,
   }
 end
+
+lspconfig.denols.setup {
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  on_attach = nvlsp.on_attach,
+  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
+}
+
+lspconfig.vtsls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  root_dir = lspconfig.util.root_pattern("package.json"),
+  single_file_support = false
+}
 
 -- configuring single server, example: typescript
 -- lspconfig.ts_ls.setup {
