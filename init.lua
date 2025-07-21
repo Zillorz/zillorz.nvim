@@ -5,7 +5,8 @@ vim.g.mapleader = " "
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 if vim.g.neovide then
-  vim.o.guifont = "CaskaydiaCove NF"
+  vim.o.guifont = "Monaspace Neon"
+  vim.g.neovide_refresh_rate = 120
 end
 
 if not vim.uv.fs_stat(lazypath) then
