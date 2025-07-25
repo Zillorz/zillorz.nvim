@@ -29,8 +29,8 @@ map("n", "<leader>e", "<C-w>h")
 map("n", "<leader>pp", "<cmd>Precognition peek<cr>")
 map("n", "<leader>pt", "<cmd>Precognition toggle<cr>")
 
-map("n", "<leader>sf", '<cmd>lua require("spectre").open_file_search()<CR>')
-map("n", "<leader>sw", '<cmd>lua require("spectre").open_visual()<CR>')
+map("n", "<leader>sf", '<cmd>lua require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })<CR>')
+map("n", "<leader>sw", '<cmd>:lua require("grug-far").open({ engine = "astgrep" })<CR>')
 
 map("v", "<Tab>", ">gv")
 map("v", "<S-Tab>", "<gv")

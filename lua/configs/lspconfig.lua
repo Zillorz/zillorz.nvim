@@ -5,7 +5,7 @@ local lspconfig = require "lspconfig"
 
 -- EXAMPLE
 -- rustaceanvim replaces rust_analyzer
-local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jdtls", "jsonls", "marksman", "svelte", "tailwindcss", "taplo", "yamlls", "gradle_ls"
+local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jdtls", "jsonls", "marksman", "svelte", "tailwindcss", "taplo", "yamlls", "gradle_ls", "gopls"
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 
