@@ -17,7 +17,7 @@ return {
       inlay_hints = { enabled = true },
     },
     keys = {
-      { "<leader>ca", false }
+      { "<leader>ca", false },
     }
   },
 
@@ -143,6 +143,10 @@ return {
     },
     opts = {
     },
+  },
+  {
+    "mfussenegger/nvim-jdtls",
+    lazy = false
   }
 }
 

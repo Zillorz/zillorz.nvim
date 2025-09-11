@@ -44,16 +44,5 @@ map("n", "<leader>tl", function()
   vim.notify("Inlay hints: " .. (enabled and " on" or "off"))
 end, { desc = "Toggle inlay hints" })
 
--- tab fix :/
-vim.api.nvim_create_autocmd('ModeChanged', {
-  pattern = '*',
-  callback = function()
-    if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
-        and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
-        and not require('luasnip').session.jump_active
-    then
-      require('luasnip').unlink_current()
-    end
-  end
-})
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

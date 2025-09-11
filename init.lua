@@ -1,13 +1,16 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
-
--- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+vim.g.maplocalleader = ""
 
 if vim.g.neovide then
   vim.o.guifont = "Monaspace Neon"
   vim.g.neovide_refresh_rate = 120
 end
+
+vim.opt.relativenumber = true
+
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 if not vim.uv.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
