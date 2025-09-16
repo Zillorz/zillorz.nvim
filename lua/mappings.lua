@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		vim.schedule(function()
 			map({ "n", "v" }, "<leader>ca", function()
-				require("tiny-code-action").code_action()
+				require("actions-preview").code_actions()
 			end, { noremap = true, silent = true, buffer = args.buf })
 		end)
 	end,

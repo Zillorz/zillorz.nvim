@@ -35,17 +35,47 @@ return {
     lazy = false,
   },
 
+  -- {
+  --   "rachartier/tiny-code-action.nvim",
+  --   dependencies = {
+  --       {"nvim-lua/plenary.nvim"},
+  --       {
+  --         "folke/snacks.nvim",
+  --         opts = {
+  --           terminal = {},
+  --         }
+  --       }
+  --   },
+  --   event = "LspAttach",
+  --   opts = {
+  --     backend = "delta",
+  --     picker = "snacks",
+  --     backend_opts = {
+  --       delta = {
+  --         header_lines_to_remove = 4,
+  --         args = {
+  --           "--line-numbers",
+  --         },
+  --       }
+  --     }
+  --   },
+  --   config = function()
+  --       require('tiny-code-action').setup()
+  --   end
+  -- },
+
   {
-    "rachartier/tiny-code-action.nvim",
-    dependencies = {
-        {"nvim-lua/plenary.nvim"},
-        {"nvim-telescope/telescope.nvim"},
-    },
+    "aznhe21/actions-preview.nvim",
     event = "LspAttach",
     config = function()
-        require('tiny-code-action').setup()
+      require('actions-preview').setup {
+        highlight_command = {
+        },
+        backend = { "snacks" },
+      }
     end
   },
+
 
   { "nvim-tree/nvim-tree.lua", enabled = false },
 
@@ -60,7 +90,8 @@ return {
       lazygit = { enabled = true },
       picker = { enabled = true },
       quickfile = { enabled = true },
-      scroll = { enabled = false }
+      scroll = { enabled = false },
+      terminal = { enabled = true }
     },
   },
 
