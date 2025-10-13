@@ -1,41 +1,54 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
-
--- EXAMPLE
 -- rustaceanvim replaces rust_analyzer
-local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jdtls", "jsonls", "marksman", "opencl_ls", "svelte", "tailwindcss", "taplo", "yamlls", "kotlin_lsp", "gradle_ls"
+local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jsonls", "marksman", "svelte", "tailwindcss", "taplo", "yamlls", "gradle_ls", "gopls", "denols", "vtsls", "jdtls"  
 }
-local nvlsp = require "nvchad.configs.lspconfig"
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
+vim.lsp.config("denols", {
+  root_markers = { "deno.json", "deno.jsonc" }
+})
+
+vim.lsp.config("vtsls", {
+  root_markers = { "package.json" },
+  workspace_required = true
+})
+
+local mason = vim.fn.stdpath("data") .. "/mason/packages"
+local bundles = {
+  vim.fn.glob(mason .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", true)
+}
+
+local jars = vim.split(vim.fn.glob(mason .. "/java-test/extension/server/*.jar", true), "\n")
+local excluded = {
+  "com.microsoft.java.test.runner-jar-with-dependencies.jar",
+  "jacocoagent.jar",
+}
+for _, jar in ipairs(jars) do
+  local fname = vim.fn.fnamemodify(jar, ":t")
+  if not vim.tbl_contains(excluded, fname) then
+    table.insert(bundles, jar)
+  end
 end
 
-lspconfig.denols.setup {
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  on_attach = nvlsp.on_attach,
-  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
-}
+-- require('java').setup()
+vim.lsp.config("jdtls", {
+  init_options = {
+     bundles = bundles,
+  },
+  root_dir = vim.fs.root(0, {'.classpath', '.project', '.git', 'gradlew', 'mvnw'}),
+  settings = {
+    java = {
+      configuration = {
+        runtimes = {
+          {
+            name = "JavaSE-17",
+            path = "C:/Program Files/Java/jdk-17/"
+          }
+        }
+      }
+    }
+  }
+})
 
-lspconfig.vtsls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  root_dir = lspconfig.util.root_pattern("package.json"),
-  single_file_support = false
-}
-
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
+vim.lsp.enable(servers);

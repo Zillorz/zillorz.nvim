@@ -1,12 +1,16 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
+vim.g.maplocalleader = ""
+
+if vim.g.neovide then
+  vim.o.guifont = "Monaspace Neon"
+  vim.g.neovide_refresh_rate = 120
+end
+
+vim.opt.relativenumber = true
 
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-
-if vim.g.neovide then
-  vim.o.guifont = "CaskaydiaCove NF"
-end
 
 if not vim.uv.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
@@ -34,8 +38,9 @@ dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
 require "options"
-require "nvchad.autocmds"
+require "autocmds"
 
 vim.schedule(function()
   require "mappings"
+  require "commands"
 end)
