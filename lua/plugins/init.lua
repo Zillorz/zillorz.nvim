@@ -3,7 +3,7 @@ return {
 
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = { "BufWritePre" },
     opts = require "configs.conform",
   },
 
@@ -18,14 +18,14 @@ return {
     },
     keys = {
       { "<leader>ca", false },
-    }
+    },
   },
 
   {
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
     config = function()
-      require('crates').setup()
+      require("crates").setup()
     end,
   },
 
@@ -68,14 +68,12 @@ return {
     "aznhe21/actions-preview.nvim",
     event = "LspAttach",
     config = function()
-      require('actions-preview').setup {
-        highlight_command = {
-        },
+      require("actions-preview").setup {
+        highlight_command = {},
         backend = { "snacks" },
       }
-    end
+    end,
   },
-
 
   { "nvim-tree/nvim-tree.lua", enabled = false },
 
@@ -91,7 +89,7 @@ return {
       picker = { enabled = true },
       quickfile = { enabled = true },
       scroll = { enabled = false },
-      terminal = { enabled = true }
+      terminal = { enabled = true },
     },
   },
 
@@ -99,44 +97,45 @@ return {
     "tris203/precognition.nvim",
     event = "VeryLazy",
     opts = {
-      startVisible = false
-    }
+      startVisible = false,
+    },
   },
 
   {
-    'MagicDuck/grug-far.nvim',
+    "MagicDuck/grug-far.nvim",
     -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
     -- additional lazy config to defer loading is not really needed...
     config = function()
       -- optional setup call to override plugin options
       -- alternatively you can set options with vim.g.grug_far = { ... }
-      require('grug-far').setup({
+      require("grug-far").setup {
         -- options, see Configuration section below
         -- there are no required options atm
-      });
-    end
+      }
+    end,
   },
 
   {
-    'nvim-flutter/flutter-tools.nvim',
+    "nvim-flutter/flutter-tools.nvim",
     event = "VeryLazy",
     dependencies = {
-        'nvim-lua/plenary.nvim',
+      "nvim-lua/plenary.nvim",
     },
     config = true,
   },
 
   {
-    'kristijanhusak/vim-dadbod-ui',
+    "kristijanhusak/vim-dadbod-ui",
+    lazy = true,
     dependencies = {
-      { 'tpope/vim-dadbod', lazy = true },
-      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql', 'sqlite' }, lazy = true }, -- Optional
+      { "tpope/vim-dadbod", lazy = true },
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql", "sqlite" }, lazy = true }, -- Optional
     },
     cmd = {
-      'DBUI',
-      'DBUIToggle',
-      'DBUIAddConnection',
-      'DBUIFindBuffer',
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer",
     },
     init = function()
       -- Your DBUI configuration
@@ -144,13 +143,13 @@ return {
     end,
   },
   { -- optional saghen/blink.cmp completion source
-    'saghen/blink.cmp',
+    "saghen/blink.cmp",
     build = "cargo +nightly build --release",
     opts = {
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
         per_filetype = {
-          sql = { 'snippets', 'dadbod', 'buffer' },
+          sql = { "snippets", "dadbod", "buffer" },
         },
         -- add vim-dadbod-completion to your completion providers
         providers = {
@@ -160,22 +159,23 @@ return {
     },
   },
   {
-      "mfussenegger/nvim-dap",
-      dependencies = {
-        {
-          "igorlfs/nvim-dap-view",
-          opts = {
-            winbar = {
-              sections = { "console", "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
-              default_section = "console"
-            }
-          }
+    "mfussenegger/nvim-dap",
+    event = "VeryLazy",
+    dependencies = {
+      {
+        "igorlfs/nvim-dap-view",
+        opts = {
+          winbar = {
+            sections = { "console", "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
+            default_section = "console",
+          },
         },
       },
+    },
   },
-  -- { 
+  -- {
   --   "rcarriga/nvim-dap-ui",
-  --   dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} 
+  --   dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}
   -- },
   {
     "hedyhli/outline.nvim",
@@ -184,21 +184,20 @@ return {
     keys = {
       { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
     },
-    opts = {
-    },
+    opts = {},
   },
   {
     "mfussenegger/nvim-jdtls",
     event = "VeryLazy",
-  }
+  },
 }
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+-- {
+-- 	"nvim-treesitter/nvim-treesitter",
+-- 	opts = {
+-- 		ensure_installed = {
+-- 			"vim", "lua", "vimdoc",
+--      "html", "css"
+-- 		},
+-- 	},
+-- },

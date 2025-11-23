@@ -41,7 +41,7 @@ map("n", "<leader>B", "<cmd>DapToggleBreakpoint<CR>", { desc = "Toggle breakpoin
 map("n", "<leader>tl", function()
   local enabled = not vim.lsp.inlay_hint.is_enabled({})
   vim.lsp.inlay_hint.enable(enabled)
-  vim.notify("Inlay hints: " .. (enabled and " on" or "off"))
+  vim.notify("Inlay hints: " .. (enabled and "on" or "off"))
 end, { desc = "Toggle inlay hints" })
 
 map("n", "s", "<Nop>")
