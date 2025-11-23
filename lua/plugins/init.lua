@@ -119,7 +119,7 @@ return {
 
   {
     'nvim-flutter/flutter-tools.nvim',
-    lazy = false,
+    event = "VeryLazy",
     dependencies = {
         'nvim-lua/plenary.nvim',
     },
@@ -162,9 +162,21 @@ return {
   {
       "mfussenegger/nvim-dap",
       dependencies = {
-          { "igorlfs/nvim-dap-view", opts = {} },
+        {
+          "igorlfs/nvim-dap-view",
+          opts = {
+            winbar = {
+              sections = { "console", "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
+              default_section = "console"
+            }
+          }
+        },
       },
   },
+  -- { 
+  --   "rcarriga/nvim-dap-ui",
+  --   dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} 
+  -- },
   {
     "hedyhli/outline.nvim",
     lazy = true,
@@ -177,7 +189,7 @@ return {
   },
   {
     "mfussenegger/nvim-jdtls",
-    lazy = false
+    event = "VeryLazy",
   }
 }
 
