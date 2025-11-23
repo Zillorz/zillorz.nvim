@@ -29,7 +29,7 @@ map("n", "<leader>pp", "<cmd>Precognition peek<cr>", { desc = "next key precog" 
 map("n", "<leader>pt", "<cmd>Precognition toggle<cr>", { desc = "toggle precog" })
 
 map("n", "<leader>sf", '<cmd>lua require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })<CR>', { desc = "search & replace in current file" })
-map("n", "<leader>sw", '<cmd>lua require("grug-far").open({ engine = "astgrep" })<CR>', { desc = "search & replace" })
+map("n", "<leader>sw", '<cmd>lua require("grug-far").open({ })<CR>', { desc = "search & replace" })
 
 map("v", "<Tab>", ">gv")
 map("v", "<S-Tab>", "<gv")
@@ -43,6 +43,8 @@ map("n", "<leader>tl", function()
   vim.lsp.inlay_hint.enable(enabled)
   vim.notify("Inlay hints: " .. (enabled and " on" or "off"))
 end, { desc = "Toggle inlay hints" })
+
+map("n", "s", "<Nop>")
 
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

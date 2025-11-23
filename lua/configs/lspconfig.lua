@@ -1,16 +1,21 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
+vim.diagnostic.config({
+  update_in_insert = true 
+})
+
 -- rustaceanvim replaces rust_analyzer
-local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jsonls", "marksman", "svelte", "tailwindcss", "taplo", "yamlls", "gradle_ls", "gopls", "denols", "vtsls", "jdtls"  
+local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jsonls", "marksman", "svelte", "tailwindcss", "taplo", "yamlls", "gradle_ls", "gopls", "denols", "vtsls", "jdtls"
 }
 
 vim.lsp.config("denols", {
-  root_markers = { "deno.json", "deno.jsonc" }
+  root_markers = { "deno.json", "deno.jsonc" },
+  workspace_required = true
 })
 
 vim.lsp.config("vtsls", {
-  root_markers = { "package.json" },
+  root_markers = { 'package.json', 'tsconfig.json' },
   workspace_required = true
 })
 
@@ -32,23 +37,12 @@ for _, jar in ipairs(jars) do
 end
 
 -- require('java').setup()
-vim.lsp.config("jdtls", {
+vim.lsp.config('jdtls', {
   init_options = {
      bundles = bundles,
   },
-  root_dir = vim.fs.root(0, {'.classpath', '.project', '.git', 'gradlew', 'mvnw'}),
-  settings = {
-    java = {
-      configuration = {
-        runtimes = {
-          {
-            name = "JavaSE-17",
-            path = "C:/Program Files/Java/jdk-17/"
-          }
-        }
-      }
-    }
-  }
+  settings = { java = { } },
+  root_dir = vim.fs.root(0, {'.classpath', '.project', '.git', 'gradlew', 'mvnw'})
 })
 
 vim.lsp.enable(servers);
