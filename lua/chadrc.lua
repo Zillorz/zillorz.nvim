@@ -3,33 +3,34 @@
 -- Please read that file to know all available options :( 
 
 ---@type ChadrcConfig
-local M = {}
+local options = {
 
-M.base46 = {
-	theme = "tokyonight",
+  base46 = {
+    theme = "doomchad",
+    integrations = { "dap", "grug_far" },
+  },
 
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+  ui = {
+    telescope = { style = "bordered" },
+  },
+
+  term = {
+    startinsert = true,
+    base46_colors = true,
+    winopts = { number = false, relativenumber = false },
+    sizes = { sp = 0.3, vsp = 0.2, ["bo sp"] = 0.3, ["bo vsp"] = 0.2 },
+    float = {
+      relative = "editor",
+      row = 0.175,
+      col = 0.125,
+      width = 0.7,
+      height = 0.6,
+      border = "double"
+    }
+  },
+
+  lsp = { signature = true },
 }
 
-M.term = {
-  float = {
-    relative = "editor",
-    row = 0.175,
-    col = 0.125,
-    width = 0.7,
-    height = 0.6,
-    border = "double"
-  }
-}
-
--- M.nvdash = { load_on_startup = true }
--- M.ui = {
---       tabufline = {
---          lazyload = false
---      }
---}
-
-return M
+local status, chadrc = pcall(require, "chadrc")
+return vim.tbl_deep_extend("force", options, status and chadrc or {})

@@ -108,6 +108,7 @@ return {
     config = function()
       -- optional setup call to override plugin options
       -- alternatively you can set options with vim.g.grug_far = { ... }
+      dofile(vim.g.base46_cache .. "grug_far")
       require("grug-far").setup {
         -- options, see Configuration section below
         -- there are no required options atm
@@ -160,7 +161,7 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
-    event = "VeryLazy",
+    event = "LspAttach",
     dependencies = {
       {
         "igorlfs/nvim-dap-view",
@@ -168,10 +169,27 @@ return {
           winbar = {
             sections = { "console", "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
             default_section = "console",
+            controls = {
+              enabled = true,
+              position = "right",
+              buttons = {
+                "play",
+                "step_into",
+                "step_over",
+                "step_out",
+                "step_back",
+                "run_last",
+                "terminate",
+                "disconnect",
+              },
+            },
           },
         },
       },
     },
+    config = function()
+      dofile(vim.g.base46_cache .. "dap")
+    end
   },
   -- {
   --   "rcarriga/nvim-dap-ui",
@@ -191,13 +209,3 @@ return {
     event = "VeryLazy",
   },
 }
-
--- {
--- 	"nvim-treesitter/nvim-treesitter",
--- 	opts = {
--- 		ensure_installed = {
--- 			"vim", "lua", "vimdoc",
---      "html", "css"
--- 		},
--- 	},
--- },

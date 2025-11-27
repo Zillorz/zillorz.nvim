@@ -1,12 +1,8 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-vim.diagnostic.config({
-  update_in_insert = true 
-})
-
 -- rustaceanvim replaces rust_analyzer
-local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jsonls", "marksman", "svelte", "tailwindcss", "taplo", "yamlls", "gradle_ls", "gopls", "denols", "vtsls", "jdtls"
+local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jsonls", "marksman", "svelte", "taplo", "yamlls", "gopls", "denols", "vtsls", "jdtls"
 }
 
 vim.lsp.config("denols", {
@@ -41,8 +37,16 @@ vim.lsp.config('jdtls', {
   init_options = {
      bundles = bundles,
   },
+  flag = {
+    allow_incremental_sync = false
+  },
+  cmd = {
+    "jdtls",
+    "-data",
+    vim.fn.stdpath('cache') .. '/jdtls/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+  },
   settings = { java = { } },
-  root_dir = vim.fs.root(0, {'.classpath', '.project', '.git', 'gradlew', 'mvnw'})
+  root_markers = {'.classpath', '.project', '.git', 'gradlew', 'mvnw'}
 })
 
 vim.lsp.enable(servers);

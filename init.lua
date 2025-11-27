@@ -2,12 +2,15 @@ vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-if vim.g.neovide then
-  vim.o.guifont = "Monaspace Neon"
-  vim.g.neovide_refresh_rate = 120
-end
+-- Neovide config is now seperate: %appdata%/config.toml
+-- [font]
+-- normal = ["Monaspace Argon NF"]
+-- size = 14
+--
+-- [font.features]
+-- "Monaspace Argon NF" = [ "+calt", "+liga", "+cv31", "cv01=2" ]
 
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -34,6 +37,7 @@ require("lazy").setup({
 }, lazy_config)
 
 -- load theme
+dofile(vim.g.base46_cache .. "syntax")
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
