@@ -13,9 +13,6 @@ return {
     config = function()
       require "configs.lspconfig"
     end,
-    opts = {
-      inlay_hints = { enabled = true },
-    },
     keys = {
       { "<leader>ca", false },
     },
@@ -31,7 +28,6 @@ return {
 
   {
     "mrcjkb/rustaceanvim",
-    version = "^5",
     lazy = false,
   },
 
@@ -58,10 +54,7 @@ return {
   --         },
   --       }
   --     }
-  --   },
-  --   config = function()
-  --       require('tiny-code-action').setup()
-  --   end
+  --   }
   -- },
 
   {
@@ -86,6 +79,7 @@ return {
       explorer = { enabled = true, replace_netrw = true },
       input = { enabled = true },
       lazygit = { enabled = true },
+      notifier = { enabled = true },
       picker = { enabled = true },
       quickfile = { enabled = true },
       scroll = { enabled = false },
@@ -208,4 +202,42 @@ return {
     "mfussenegger/nvim-jdtls",
     event = "VeryLazy",
   },
+  {
+    "kawre/leetcode.nvim",
+    cmd = "Leet",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim"
+    },
+    opts = {
+      plugins = {
+        non_standalone = true
+      }
+    }
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      views = {
+        notify = {
+          replace = true,
+        },
+      },
+      lsp = {
+        progress = {
+          view = "notify"
+        },
+        hover = {
+          enabled = false
+        },
+        signature = {
+          enabled = false
+        }
+      }
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+  }
 }

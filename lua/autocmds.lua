@@ -12,3 +12,25 @@ vim.api.nvim_create_autocmd('ModeChanged', {
     end
   end
 })
+
+vim.api.nvim_create_autocmd('RecordingEnter', {
+  pattern = '*',
+  callback = function()
+    Snacks.notifier.notify(
+      "Recording @" .. vim.fn.reg_recording(),
+      nil,
+      {
+        id = 'MACRO',
+        title = 'Macro',
+        timeout = false
+      }
+    );
+  end
+})
+
+vim.api.nvim_create_autocmd('RecordingLeave', {
+  pattern = '*',
+  callback = function()
+    Snacks.notifier.hide('MACRO')
+  end
+})

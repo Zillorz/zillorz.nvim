@@ -6,7 +6,7 @@
 local options = {
 
   base46 = {
-    theme = "doomchad",
+    theme = "radium",
     integrations = { "dap", "grug_far" },
   },
 
