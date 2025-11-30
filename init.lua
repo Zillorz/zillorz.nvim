@@ -2,14 +2,7 @@ vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Neovide config is now seperate: %appdata%/config.toml
--- [font]
--- normal = ["Monaspace Argon NF"]
--- size = 14
---
--- [font.features]
--- "Monaspace Argon NF" = [ "+calt", "+liga", "+cv31", "cv01=2" ]
-
+-- Neovide config is now seperate, see (extra/neovide_config.toml)
 vim.opt.relativenumber = true
 
 -- bootstrap lazy and all plugins
@@ -43,6 +36,7 @@ dofile(vim.g.base46_cache .. "statusline")
 
 require "options"
 require "autocmds"
+require "chadrc"
 
 vim.schedule(function()
   require "mappings"

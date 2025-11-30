@@ -1,0 +1,7 @@
+# This file goes to %appdata%/neovide/config.toml
+[font]
+normal = ["Monaspace Argon NF"]
+size = 14
+
+[font.features]
+"Monaspace Argon NF" = [ "+calt", "+liga", "+cv31", "cv01=2" ]
