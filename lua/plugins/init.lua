@@ -3,6 +3,7 @@ return {
 
   {
     "stevearc/conform.nvim",
+    lazy = true,
     event = { "BufWritePre" },
     opts = require "configs.conform",
   },
@@ -19,6 +20,15 @@ return {
   },
 
   {
+    "nvim-telescope/telescope.nvim",
+    opts = function(_, conf)
+      require("telescope").load_extension("fzf")
+      return conf
+    end
+  },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+
+  {
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
     config = function()
@@ -31,65 +41,68 @@ return {
     lazy = false,
   },
 
-  -- {
-  --   "rachartier/tiny-code-action.nvim",
-  --   dependencies = {
-  --       {"nvim-lua/plenary.nvim"},
-  --       {
-  --         "folke/snacks.nvim",
-  --         opts = {
-  --           terminal = {},
-  --         }
-  --       }
-  --   },
-  --   event = "LspAttach",
-  --   opts = {
-  --     backend = "delta",
-  --     picker = "snacks",
-  --     backend_opts = {
-  --       delta = {
-  --         header_lines_to_remove = 4,
-  --         args = {
-  --           "--line-numbers",
-  --         },
-  --       }
-  --     }
-  --   }
-  -- },
-
   {
-    "aznhe21/actions-preview.nvim",
+    "rachartier/tiny-code-action.nvim",
+    dependencies = {
+        {"nvim-lua/plenary.nvim"},
+        {
+          "folke/snacks.nvim",
+          opts = {
+            terminal = {},
+          }
+        }
+    },
     event = "LspAttach",
-    config = function()
-      require("actions-preview").setup {
-        highlight_command = {},
-        backend = { "snacks" },
+    opts = {
+      backend = "delta",
+      picker = "snacks",
+      backend_opts = {
+        delta = {
+          header_lines_to_remove = 4,
+          args = {
+            "--line-numbers",
+          },
+        }
       }
-    end,
+    }
   },
 
-  { "nvim-tree/nvim-tree.lua", enabled = false },
+  -- {
+  --   "aznhe21/actions-preview.nvim",
+  --   event = "LspAttach",
+  --   config = function()
+  --     require("actions-preview").setup {
+  --       highlight_command = {},
+  --       backend = { "snacks" },
+  --     }
+  --   end,
+  -- },
+
+  { "nvim-tree/nvim-tree.lua", enabled = true },
+  { "nvim-tree/nvim-web-devicons", lazy = true, event = "VeryLazy" },
 
   {
     "folke/snacks.nvim",
     priority = 1000,
-    lazy = false,
+    -- lazy = false,
+    -- This is actually fine in this config, 
+    -- even though it warns against it
+    event = "VeryLazy",
     opts = {
       bigfile = { enabled = true },
-      explorer = { enabled = true, replace_netrw = true },
+      explorer = { enabled = false, replace_netrw = false },
       input = { enabled = true },
       lazygit = { enabled = true },
       notifier = { enabled = true },
       picker = { enabled = true },
       quickfile = { enabled = true },
-      scroll = { enabled = false },
-      terminal = { enabled = true },
-    },
+      scroll = { enabled = false }
+    }
   },
 
   {
     "tris203/precognition.nvim",
-    event = "VeryLazy",
+    event = "BufRead",
     opts = {
       startVisible = false,
     },
@@ -112,7 +125,8 @@ return {
 
   {
     "nvim-flutter/flutter-tools.nvim",
-    event = "VeryLazy",
+    lazy = true,
+    ft = { "dart" },
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -139,6 +153,7 @@ return {
   },
   { -- optional saghen/blink.cmp completion source
     "saghen/blink.cmp",
+    lazy = true,
     build = "cargo +nightly build --release",
     opts = {
       sources = {
@@ -200,7 +215,8 @@ return {
   },
   {
     "mfussenegger/nvim-jdtls",
-    event = "VeryLazy",
+    lazy = true,
+    ft = { "java" },
   },
   {
     "kawre/leetcode.nvim",
@@ -239,5 +255,21 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
     },
+  },
+  { 'glacambre/firenvim', build = ":call firenvim#install(0)"},
+  {
+    "OXY2DEV/markview.nvim",
+    ft = { "markdown" },
+    dependencies = { "saghen/blink.cmp" },
+    config = function()
+      dofile(vim.g.base46_cache .. "markview")
+    end
   }
+  -- {
+  --   'jmbuhr/otter.nvim',
+  --   dependencies = {
+  --     'nvim-treesitter/nvim-treesitter',
+  --   },
+  --   opts = {},
+  -- }
 }

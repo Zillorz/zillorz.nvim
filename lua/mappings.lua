@@ -7,20 +7,23 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 
 map("n", "gl", function () vim.diagnostic.open_float() end)
 
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		vim.schedule(function()
-			map({ "n", "v" }, "<leader>ca", function()
-				require("actions-preview").code_actions()
-			end, { noremap = true, silent = true, buffer = args.buf })
-		end)
-	end,
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+-- 	callback = function(args)
+-- 		vim.schedule(function()
+-- 			map({ "n", "v" }, "<leader>ca", function()
+-- 				require("actions-preview").code_actions()
+-- 			end, { noremap = true, silent = true, buffer = args.buf })
+-- 		end)
+-- 	end,
+-- })
+vim.keymap.set({ "n", "v" }, "<leader>ca", function()
+	require("tiny-code-action").code_action()
+end, { noremap = true, silent = true })
 
 map("n", "<leader>gl", function() Snacks.lazygit() end)
 
-del("n", "<C-n>")
-map({ "n", "v" }, "<C-n>", function() Snacks.explorer() end)
+-- del("n", "<C-n>")
+-- map({ "n", "v" }, "<C-n>", function() Snacks.explorer() end)
 
 del("n", "<leader>e")
 map("n", "<leader>e", "<C-w>h")
@@ -43,6 +46,8 @@ map("n", "<leader>tl", function()
   vim.lsp.inlay_hint.enable(enabled)
   vim.notify("Inlay hints: " .. (enabled and "on" or "off"))
 end, { desc = "Toggle inlay hints" })
+
+map({ "n", "v" }, "<S-M>", '<cmd>Man<CR>');
 
 map("n", "s", "<Nop>")
 

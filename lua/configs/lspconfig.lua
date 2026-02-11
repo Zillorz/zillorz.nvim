@@ -2,7 +2,7 @@
 require("nvchad.configs.lspconfig").defaults()
 
 -- rustaceanvim replaces rust_analyzer
-local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jsonls", "marksman", "svelte", "taplo", "yamlls", "gopls", "denols", "vtsls", "jdtls"
+local servers = { "html", "cssls", "basedpyright", "clangd", "dockerls", "emmet_language_server", "jsonls", "marksman", "matlab_ls", "svelte", "taplo", "yamlls", "gopls", "denols", "vtsls", "jdtls"
 }
 
 vim.lsp.config("denols", {
@@ -38,7 +38,7 @@ vim.lsp.config('jdtls', {
      bundles = bundles,
   },
   flag = {
-    allow_incremental_sync = false
+    allow_incremental_sync = true
   },
   cmd = {
     "jdtls",
@@ -46,7 +46,7 @@ vim.lsp.config('jdtls', {
     vim.fn.stdpath('cache') .. '/jdtls/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
   },
   settings = { java = { } },
-  root_markers = {'.classpath', '.project', '.git', 'gradlew', 'mvnw'}
+  root_markers = {'.classpath', '.project', '.git', 'gradlew', 'mvnw' }
 })
 
 vim.lsp.enable(servers);

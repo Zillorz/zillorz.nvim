@@ -6,8 +6,8 @@
 local options = {
 
   base46 = {
-    theme = "radium",
-    integrations = { "dap", "grug_far" },
+    theme = "material-darker",
+    integrations = { "dap", "grug_far", "markview" },
   },
 
   ui = {

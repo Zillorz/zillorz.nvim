@@ -1,9 +1,11 @@
 import sys
 
-excluded = ["date", "dir", "echo"]
+excluded = ["date", "dir", "echo", "whoami"]
 manual = {
     "v": "nvim",
-    "nv": "neovide"
+    "nv": "start neovide",
+    "nr": "note-runner",
+    "wmake": "wsl make"
 }
 
 for line in sys.stdin:
@@ -16,9 +18,7 @@ for line in sys.stdin:
     _ = file.write("@echo off\n")
     _ = file.write(f"coreutils {command} %*")
 
-for k, v in manual:
+for k, v in manual.items():
     file = open(f"{k}.bat", "w")
     _ = file.write("@echo off\n")
     _ = file.write(f"{v} %*")
-
-

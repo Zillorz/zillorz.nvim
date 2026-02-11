@@ -1,3 +1,10 @@
+vim.loader.enable()
+
+-- This actually speeds up launch by 50ms on windows!
+if vim.fn.has('win32') == 1 then
+  vim.g.clipboard = "win32yank"
+end
+
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
