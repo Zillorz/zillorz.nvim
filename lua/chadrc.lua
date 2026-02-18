@@ -6,8 +6,8 @@
 local options = {
 
   base46 = {
-    theme = "material-darker",
-    integrations = { "dap", "grug_far", "markview" },
+    theme = "jabuti",
+    integrations = { "blink", "dap", "devicons", "nvcheatsheet", "grug_far", "markview", "mason", "nvshades", "nvimtree", "treesitter", "whichkey" },
   },
 
   ui = {

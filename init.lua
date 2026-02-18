@@ -10,6 +10,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Neovide config is now seperate, see (extra/neovide_config.toml)
+if vim.g.neovide then
+  vim.g.neovide_input_macos_option_key_is_meta = 'both'
+end
+
 vim.opt.relativenumber = true
 
 -- bootstrap lazy and all plugins
@@ -40,6 +44,12 @@ require("lazy").setup({
 dofile(vim.g.base46_cache .. "syntax")
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
+
+-- This is here for now ig?
+-- Try to lazy load these??
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+ dofile(vim.g.base46_cache .. v)
+end
 
 require "options"
 require "autocmds"
