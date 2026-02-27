@@ -197,6 +197,7 @@ return {
       },
     },
     config = function()
+      require "configs.dap"
       dofile(vim.g.base46_cache .. "dap")
     end
   },
