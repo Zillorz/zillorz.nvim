@@ -19,6 +19,8 @@ local servers = {
   "denols",
   "vtsls",
   "jdtls",
+  "asm_lsp",
+  "tailwindcss"
 }
 
 -- See more inlay_hint configs here
@@ -41,8 +43,6 @@ vim.lsp.config("denols", {
     -- The project root is where the LSP can be started from
     local root_markers = { 'deno.lock', 'deno.json', 'deno.jsonc' }
     -- Give the root markers equal priority by wrapping them in a table
-    root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
-      or vim.list_extend(root_markers, { '.git' })
     -- only include deno projects
     local deno_root = vim.fs.root(bufnr, { 'deno.json', 'deno.jsonc' })
     local deno_lock_root = vim.fs.root(bufnr, { 'deno.lock' })
@@ -60,7 +60,6 @@ vim.lsp.config("denols", {
       local vtsls_root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
 
       -- Give the root markers equal priority by wrapping them in a table
-      vtsls_root_markers = { vtsls_root_markers, { ".git" } }
       local node_project_root = vim.fs.root(bufnr, vtsls_root_markers)
 
       if not node_project_root then
@@ -79,8 +78,6 @@ vim.lsp.config("vtsls", {
     -- manager lock file.
     local root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
     -- Give the root markers equal priority by wrapping them in a table
-    root_markers = vim.fn.has "nvim-0.11.3" == 1 and { root_markers, { ".git" } }
-      or vim.list_extend(root_markers, { ".git" })
     -- exclude deno
     local deno_root = vim.fs.root(bufnr, { "deno.json", "deno.jsonc" })
     local deno_lock_root = vim.fs.root(bufnr, { "deno.lock" })
